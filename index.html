@@ -34,39 +34,65 @@
       }
       .progress-container {
         display: flex;
-        align-items: center;
+        flex-direction: column;
         gap: 1rem;
-        overflow-x: auto;
         padding: 1rem;
-        white-space: nowrap;
         background: #f8fafc;
         border-radius: 0.5rem;
+        position: relative;
+      }
+      .progress-container::before {
+        content: '';
+        position: absolute;
+        left: 2.5rem;
+        top: 0;
+        height: 100%;
+        width: 2px;
+        background: #e2e8f0;
       }
       .progress-item {
         display: flex;
-        align-items: center;
-        gap: 0.5rem;
+        align-items: flex-start;
+        gap: 1rem;
         background: white;
-        padding: 0.75rem;
+        padding: 1rem;
         border-radius: 0.5rem;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        transition: all 0.3s ease;
-        border: 1px solid #e2e8f0;
+        margin-left: 1.5rem;
         position: relative;
+        border-left: 4px solid #e2e8f0;
+      }
+      .progress-item::before {
+        content: '';
+        position: absolute;
+        left: -2.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 1rem;
+        height: 1rem;
+        border-radius: 50%;
+        background: #fff;
+        border: 2px solid #e2e8f0;
       }
       .progress-item.completed {
+        border-left-color: #22c55e;
+      }
+      .progress-item.completed::before {
+        background: #22c55e;
         border-color: #22c55e;
       }
       .progress-item.pending {
+        border-left-color: #eab308;
+      }
+      .progress-item.pending::before {
         border-color: #eab308;
       }
       .progress-item.active {
-        border-color: #3b82f6;
-        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        border-left-color: #3b82f6;
       }
-      .arrow-separator {
-        color: #4b5563;
-        font-size: 0.75rem;
+      .progress-item.active::before {
+        border-color: #3b82f6;
+        background: #3b82f6;
       }
       .progress-text {
         color: #1f2937;
