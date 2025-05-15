@@ -150,6 +150,38 @@
           transform: rotate(360deg);
         }
       }
+      .tooltip {
+        visibility: hidden;
+        width: 200px;
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px;
+        position: absolute;
+        z-index: 1;
+        bottom: 125%;
+        left: 50%;
+        margin-left: -100px;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+
+      .tooltip::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: #333 transparent transparent transparent;
+      }
+
+      .progress-item:hover .tooltip {
+        visibility: visible;
+        opacity: 1;
+      }
     </style>
   </head>
   <body class="bg-gray-100 flex items-center justify-center min-h-screen">
@@ -327,6 +359,11 @@
                                     <div class="text-[10px] progress-text">${
                                       stage.date
                                     }</div>
+                                </div>
+                                <div class="tooltip">
+                                    ${stage.title}: ${stage.description}<br>
+                                    Date: ${stage.date}<br>
+                                    Status: ${stage.status}
                                 </div>
                             </div>
                         </div>
