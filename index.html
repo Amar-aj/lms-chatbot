@@ -35,29 +35,34 @@
       .progress-container {
         display: flex;
         align-items: center;
-        gap: 0.5rem;
+        gap: 1rem;
         overflow-x: auto;
-        padding: 0.5rem 0;
+        padding: 1rem;
         white-space: nowrap;
+        background: #f8fafc;
+        border-radius: 0.5rem;
       }
       .progress-item {
         display: flex;
         align-items: center;
-        gap: 0.25rem;
-        background: #f9fafb;
-        padding: 0.5rem;
-        border-radius: 0.25rem;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-        transition: transform 0.2s ease-in-out;
+        gap: 0.5rem;
+        background: white;
+        padding: 0.75rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+        border: 1px solid #e2e8f0;
+        position: relative;
       }
-      .progress-item:hover {
-        transform: scale(1.05);
+      .progress-item.completed {
+        border-color: #22c55e;
       }
-      .progress-dot {
-        width: 0.5rem;
-        height: 0.5rem;
-        border-radius: 50%;
-        border: 1px solid white;
+      .progress-item.pending {
+        border-color: #eab308;
+      }
+      .progress-item.active {
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
       }
       .arrow-separator {
         color: #4b5563;
@@ -228,6 +233,7 @@
       // Format case progress/stages as a horizontal row with arrow separators
       const formatCaseProgress = (caseData) => {
         const stages = [];
+        const currentDate = new Date();
 
         // Case filed stage
         const filedEvent = caseData.history.find(
@@ -303,7 +309,8 @@
                     ${stages
                       .map(
                         (stage, index) => `
-                        <div class="progress-item">
+                        <div class="progress-item ${stage.status === "completed" ? "completed" : 
+                          new Date(stage.date) > currentDate ? "pending" : "active"}">
                             <div class="progress-dot ${
                               stage.status === "completed"
                                 ? "bg-green-500"
